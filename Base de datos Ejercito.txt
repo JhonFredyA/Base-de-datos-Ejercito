@@ -1,0 +1,96 @@
+-- Active: 1722642613328@@127.0.0.1@3306
+CREATE DATABASE JHO
+    DEFAULT CHARACTER SET = 'utf8mb4';
+
+    USE JHO;
+
+    CREATE TABLE Soldado(
+        Id_soldado INT(5) AUTO_INCREMENT PRIMARY KEY,
+        primer_nombre_sol VARCHAR(10),
+        segundo_nombre_sol VARCHAR(10),
+        primer_apellido_sol VARCHAR (10),
+        segundo_apellido_sol VARCHAR (10),
+        Grado VARCHAR(10),
+        Edad BIGINT(3)
+    );
+
+    CREATE TABLE Cuartel(
+        Id_cuar INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre_cuar VARCHAR (10),
+        Ubicacion_cuar VARCHAR (10)
+    );
+
+    CREATE TABLE Cuerpo(
+        Id_cuer INT (5) AUTO_INCREMENT PRIMARY KEY,
+        cuerpo_cuer VARCHAR (10),
+        denominacion_cuer VARCHAR(10),
+        unidades_cuer VARCHAR(10)
+    );
+
+    CREATE TABLE Ubicacion(
+        id_ubi INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Pais_ubi VARCHAR (10),
+        Departamento_ubi VARCHAR (10),
+        Ciudad_ubi VARCHAR(10),
+        Barrio_ubi VARCHAR(10),
+        calle_ubi VARCHAR(10)
+    );
+
+    CREATE TABLE Compañia(
+        id_comp INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre VARCHAR(10),
+        actividad_principal_comp VARCHAR(10),
+        actividad_secundaria_comp VARCHAR(10)
+    );
+
+    CREATE TABLE Servicios(
+        id_ser INT (5) AUTO_INCREMENT PRIMARY KEY,
+        Nombre VARCHAR (10),
+        actividad_principal_ser VARCHAR(10),
+        actividad_secundaria_ser VARCHAR (10)
+    );
+
+    CREATE Table cuartel_compañia(
+        id_cuarcomp INT (5) AUTO_INCREMENT PRIMARY KEY,
+        id_cuartel1 INT (10),
+        id_soldado1 INT (10)
+    );
+
+    CREATE Table servicio_soldado(
+        id_sersol INT (5) AUTO_INCREMENT PRIMARY KEY,
+        id_servicio1 INT (10),
+        id_soldado1 INT (10)
+    );
+
+    SHOW TABLES ;
+
+    drop DATABASE JHO;
+
+    DROP TABLE Servicios;
+
+    ALTER Table Cuartel ADD Ubicacion  VARCHAR(25)
+
+    ALTER Table Soldado Drop Chirris;
+
+    ALTER TABLE Soldado ADD id_cuar1 INT(10);
+    ALTER Table Soldado ADD Constraint fk_iduno FOREIGN KEY (id_cuar1)REFERENCES Cuartel (id_cuar);
+    ALTER Table Soldado Add id_cuer1 INT(10);
+    ALTER Table Soldado ADD Constraint fk_iddos FOREIGN KEY (id_cuer1) REFERENCES Cuerpo (id_cuer);
+
+    ALTER Table Soldado ADD id_serv1 INT (10);
+    ALTER Table Soldado ADD Constraint fk_idtres FOREIGN KEY (id_serv1) REFERENCES servicio_soldado (id_sersol);
+
+    ALTER table Compañia Add id_
+
+    ALTER Table Servicios ADD id_serv2 INT (10);
+    ALTER Table Servicios ADD Constraint fk_idcua FOREIGN KEY (id_serv2) REFERENCES servicio_soldado (id_sersol);
+
+    ALTER Table Cuartel ADD id_cuar1 INT(10);
+    ALTER Table Cuartel ADD Constraint  fk_idcuar FOREIGN KEY (id_cuar1) REFERENCES cuartel_compañia (id_cuarcomp);
+
+    ALTER Table Compañia Add id_comp1 INT (10);
+    ALTER Table Compañia ADD Constraint fk_idcomp FOREIGN KEY (id_comp1) REFERENCES cuartel_compañia (id_cuarcomp);
+
+    ALTER Table cuartel_compañia ADD id_cuarcomp1 INT (10);
+    ALTER Table cuartel_compañia ADD Constraint fk_idcin FOREIGN KEY (id_cuarcomp1) REFERENCES Ubicacion (id_ubi);
+
